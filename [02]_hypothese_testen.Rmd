@@ -1,0 +1,204 @@
+# Werkcollege 2: Statistische toetsen
+
+```{block2, type='ABD'}
+
+Lees Chapter 6 (*Hypothesis testing*)
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+```
+
+Belangrijkste leerdoelen:
+
+* Hypotheses kunnen opstellen
+* Kunnen omschrijven wat de p-waarde is die uit een statistische toets rolt
+* Begrijpen wat fouten van eerste (type I) en tweede (type II) soort zijn.
+
+
+## Hypotheses
+Statistische toetsen zijn ontwikkeld om helder te krijgen hoe betrouwbaar een bepaalde uitspraak is.
+In blok 2 hebben jullie geleerd om vanuit een steekproef het **betrouwbaarheidsinterval** te berekenen van het gemiddelde.
+Je geeft daarmee aan dat het gemiddelde, met een bepaalde waarschijnlijkheid (meestal 95%) tussen een minimale en maximale waarde zit.
+
+Met een statistische toets, doe je precies het omgekeerde.
+In plaats van het bepalen van het betrouwbaarheidsinterval, bepaal je de waarschijnlijkheid dat iets gelijk is aan een preciese waarde (je veronderstelling).
+De veronderstelling wordt de **nul-hypothese** genoemd (H~0~).
+Wanneer het helemaal niet waarschijnlijk is dat de H~0~ waar is, verwerp je deze.
+Je neemt dan de **alternatieve hypothese** aan (meestal H~1~ genoemd).
+De H~1~ is, in tegenstelling tot de H~0~, nooit precies (bijv. het gemiddelde is niet gelijk aan 10).
+
+Meestal is de H~0~ niet jouw **onderzoekshypothese**!
+Meestal verwacht je een verschil tussen bijv. twee behandelingen, maar je H~0~ stelt dat er geen verschil is.
+
+```{exercise, hypotheses}
+Hypotheses opstellen
+
+* Maak de volgende opgaven:
+
+    * Opgave 15 (blz. 170)
+    * Opgave 16 (blz. 170)
+    * Ogave 17 (blz. 171)
+```
+
+
+## Type I en type II fouten
+Je hoopt natuurlijk altijd de juiste conclusie te trekken uit je data.
+Helaas is dat niet altijd het geval.
+Gelukkig kunnen we met statistiek wel aangeven hoe **betrouwbaar** je conclusie is.
+
+De meest kritieke fout is het ten onrechte verwerpen van de H~0~: je toont een verschil aan die er niet is.
+Dat noem je een fout van de **eerste soort** oftewel een **Type I fout**.
+De kans op deze fout wordt (bijna) standaard op **5%** gezet.
+De p-waarde geeft de waarschijnlijkheid dat de H~0~ **waar** is.
+Komt de p-waarde onder de 0,05 (=5%), dan verwerpen we de H~0~.
+Die drempelwaarde wordt aangegeven met de Griekse letter $\alpha$.
+
+Een irritante fout is als er echt wel een verschil is (dus de nul-hypothese is **niet** waar), maar je kan het niet aantonen.
+Dit wordt een fout van de **tweede soort** genoemd oftewel een **Type II fout**.
+Hoe strenger je bent voor de kans op een fout van de eerste soort, hoe groter de kans op een fout van de tweede soort (denk daar maar even over na!).
+
+
+```{exercise, typefouten}
+Type I en type II fouten
+
+* Beschrijf in eigen woorden de betekenis van:
+
+    * p-waarde
+    * fout van de eerste soort
+    * fout van de tweede soort
+```
+
+### Zijn padden links- of rechtshandig?
+In het boek wordt in *Example* 6.2 een onderzoek aangehaald haar links- of rechtshandigheid bij Europese padden.
+Basazzi *et al.* [1996](https://www.nature.com/articles/379408a0) hadden random 18 padden gevangen en getest op links- of rechtshandigheid.
+
+De onderzoekshypothese was dat er dominantie was van links of rechtshandigheid bij padden (net als de meeste mensen rechtshandig zijn).
+
+Dat onderzoek gaan we nu virtueel herhalen in twee populaties met de volgende code:
+
+```{r, eval = FALSE}
+
+populatie_1 <- sample(c("links", "rechts"), 18, replace = TRUE)
+table(populatie_1)
+
+populatie_2 <- sample(c("links", "rechts"), 18, 
+                      replace = TRUE, prob = c(0.2, 0.8))
+table(populatie_2)
+
+```
+
+Wil je precies weten wat de functie `sample()` doet, voer dan in R de volgende code uit: `?sample`.
+Dan krijg je de Help-documentatie te zien.
+
+De statistische hypothese zijn:
+
+* H~0~: $p_{links} = p_{rechts}$ 
+* H~1~: $p_{links} \neq p_{rechts}$
+
+
+```{exercise, padden}
+Paddenexperiment: klassikale opdracht!
+
+* Kopieer bovenstaande code naar een script in RStudio.
+* Gebruik deze code om uit beide populaties een steekproef te nemen van 18 padden
+* Geef het aantal rechtshandige padden in het [Form](https://forms.office.com/Pages/ResponsePage.aspx?id=KiOfzFGYsEayPmQdaAWQ3wQeab5hX9VKmg2j17Cef29UMVUzWUNZT1RKVVNNVjlRSjRBMkNVNVVNWS4u){target="_blank"}
+* Denk je dat de kans op rechtshandigheid wel/niet 50% is voor populatie 1 en 2?
+* Kijk nog eens goed naar de code. In welke populatie is er werkelijk voorkeur voor rechtshandigheid?
+```
+
+
+Je ziet dat het moeilijk is om de juiste conclusie te trekken uit een steekproef.
+Heb je bij de eerste populatie een uitkomst die flink afwijkt van 50% kans op rechtshandigheid ben je geneigd om de H~0~ te verwerpen, maar daarmee maak je een type I fout (in populatie 1 geldt $p_{links} = p_{rechts}$). 
+Heb je juist weinig verschil in rechts- en linkshandigheid in populatie 2, en dus de H~0~ niet verwerpt, dan maak je een type II fout (in populatie 2 geldt $p_{rechts} = 0,8$).
+
+
+##Overschrijdingskans
+De H~0~ van het paddenexperiment is dat er geen verschil is in kans op links- of rechtshandigheid, dus p~rechts~ = 0,5.
+De hypothese van de onderzoekers was juist dat er wél een voorkeur was, dus dat p~rechts~ ≠ 0,5.
+De onderzoekers hadden vooraf geen uitspraak gedaan of ze juist meer links- of juist meer rechtshandige padden zouden vinden.
+Een afwijking naar beneden (p < 0,5) of naar boven (p > 0.5) is allebei een aanwijzing dat de H~0~ niet klopt.
+Wijkt jouw steekproef genoeg af, dan is de juistheid van de H~0~ ongeloofwaardig, en verwerp je die.
+
+Met statistiek kan je die geloofwaardigheid van de H~0~ berekenen.
+Hiervoor heb je de **kansverdeling** nodig voor de situatie dat je H~0~ waar is.
+Voor het paddenexperiment is dat:
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+theme_set(theme_classic(base_size = 15))
+
+colbars <- rep("grey", 19)
+colbars[1:5] = "green"
+colbars[15:19] = "green"
+
+data.frame(n=0:18, dichtheid = dbinom(0:18, 18, p=0.5)) %>% 
+   ggplot(aes(n, dichtheid)) +
+   geom_col(color = "black", fill = colbars) +
+   xlab("aantal rechtshandige padden")
+
+```
+
+In het groen aangegeven is het gebied waar je veilig kan aannamen dat de H~0~ niet waar is.
+Hoe veilig?
+Het oppervlak van het groene gedeelte is 5% van het totaal.
+Zit je in het groene gedeelte, dan kan je dus met 95% zekerheid zeggen dat de H~0~ **niet** waar is.
+Je **verwerpt** dan de H~0~, en **neemt** de H~1~ **aan**.
+
+Hoe voorzichtig je wilt zijn met je uitspraken, kan je aangeven met de term $\alpha$ (de griekse letter alpha), die staat voor de drempelwaarde van de **overschrijdingskans** waarbij we nu $\alpha=0,05$ hebben genomen.
+
+```{exercise, verwerpen}
+H~0~ verwerpen, of niet?
+
+* Check voor je steekproef uit populatie 1 en populatie 2 van de vorige opdracht of ze in het groene gebied zitten.
+
+```
+
+Je kan ook precies uitrekenen hoe onwaarschijnlijk je uitkomst is onder de H~0~.
+Je berekent dan de **overschrijdingskans**, aangegeven met **p-waarde** (*p-value* of *probability value* in het Engels).
+Dat doe je met een **statistische toets**.
+In dit geval gebruik je de binomiale toets (in jaar 2 meer hierover):
+
+`binom.test(x, n)$p.value`
+
+Waarbij x staat voor het aantal keer rechtshandig en n voor de grootte van de steekproef (18).
+
+```{exercise, overschrijdingskans}
+Overschrijdingskans
+
+* gebruik bovenstaande code om voor beide steekproeven die je genomen hebt de overschrijdingskans uit te rekenen.
+* Geef in het volgende [Form](https://forms.office.com/Pages/ResponsePage.aspx?id=KiOfzFGYsEayPmQdaAWQ3wQeab5hX9VKmg2j17Cef29UN1hSRlo1QlhZNTBFWDlWNUlNRFFHVVhETC4u){target="_blank"} aan voor populatie 1 en 2 of je de H~0~ verwerpt (als p<0,05).
+
+```
+
+
+## Eenzijdig en tweezijdig toetsen
+Bij de vorige oefening hebben we **tweezijdig** getest: het maakt niet welke richting de afwijking is, als er maar genoeg verschil is om onwaarschijnlijk genoeg te zijn.
+
+Soms ben je alleen geïnteresseerd of er een verschil in één richting is, bijv. als de onderzoekers vooraf al de theorie hadden dat de meeste padden rechtshandig zijn.
+Dan ben je **eenzijdig** aan het toetsen.
+
+```{exercise, alternative}
+Een- of tweezijdig toetsen
+
+* Gebruik de [paddenapp](https://hastv.shinyapps.io/Toad/){target="_blank"} om te onderzoeken hoe een- en tweezijdig testen werkt.
+
+```
+
+##Overige opgaven
+
+```{exercise, opgavenh6}
+Opgaven boek
+
+* 6.1
+* 6.2
+* 6.3
+* 6.7
+* 6.8
+* 6.10
+* 6.12
+
+```
+

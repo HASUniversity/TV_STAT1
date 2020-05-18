@@ -1,0 +1,181 @@
+# Werkcollege 3: Normale verdeling
+
+```{block2, type='ABD'}
+
+Lees Chapter 10 (*Normal distribution*):
+
+* 10.1 (*Bell-shaped curves and the normal distribution*)
+* 10.3 (*Properties of the normal distribution*)
+* 10.5 (*The normal distribution of sample means*)
+* 10.6 (*Central limit theorem*)
+* 10.8 (*Summary*)
+
+```
+
+Belangrijkste leerdoelen:
+
+* Normale verdeling snappen
+* Met behulp van R Z-toetsen uitvoeren
+
+##Inleiding
+Zoals jullie in blok 2 hebben geleerd, gedraagt veel variatie zich op een karakteristieke manier die omschreven kan worden als de **normale verdeling**.
+
+Ter illustratie hieronder een histogram van de gemiddelde cijfers van het HAVO-eindexamen biologie per school weergegeven.
+Je ziet dat de verdeling min of meer een normale verdeling volgt (de zwarte lijn).
+
+```{r echo=FALSE, warning=FALSE, error=FALSE, message=FALSE}
+library(tidyverse)
+theme_set(theme_classic(base_size = 15))
+library(readxl)
+
+examencijfers <- read_excel("../data/examencijfers.xlsx")
+normdata <- examencijfers %>% 
+  filter(VAKNAAM == 'biologie') %>%
+  summarise(mean = mean(gem_cijfer), sd = sd(gem_cijfer))
+
+examencijfers %>% 
+  filter(VAKNAAM == 'biologie') %>% 
+  ggplot(aes(gem_cijfer)) +
+  geom_histogram(aes(y = ..density..), binwidth = 0.1, fill = "blue") +
+  stat_function(fun  =  dnorm, 
+                args = c(normdata$mean, normdata$sd))
+
+```
+
+
+```{exercise, N-verdeling}
+normale verdeling
+
+* Op basis van welke twee parameters is bovenstaande normale verdeling gebaseerd?
+
+```
+
+##R als alternatief voor een tabel
+In blok 2 heb je, met behulp van een tabel, de volgende vraag op kunnen lossen:
+
+> Koeien van het ras Holstein-Friesian hebben gemiddeld een gewicht van 540 kg, met een standaarddeviatie van 5 kg.
+De vraag is: Hoe hoog is de fractie koeien van het ras Holstein-Friesian met een gewicht tussen 542 en 545 kg?
+
+Hoe pakte je dat aan in blok 2?
+
+* Het gaat om de volgende verdeling: $\underline{x} \sim N(\mu=540, \sigma=5)$.
+Fractie koeien tussen 542 en 545 kg: $P(542<\underline{x}<545)$.
+
+* Volgende stap is omrekenen naar de standaard normale verdeling, je berekent dan de z-waardes van 542 en 545 kg: $P \left( \frac{542-540}{5}<Z< \frac{545-540}{5} \right)$.
+
+* Vervolgens zoek je in de tabel de kans op $P \left( Z>\frac{2}{5} \right)$ en $P \left( Z>\frac{5}{5} \right)$ en trek deze van elkaar af: $0.3446-0.1587 = 0.1859$
+
+In plaats van de tabel, kan je ook R-code gebruiken: `pnorm()`.
+NB: deze functie berekent standaard $P \left( \underline{x}<q \right)$, dus de *lower tail* als je een normale verdeling bekijkt.
+Wil je het oppervlak aan de rechterkant van q weten, voeg dan het argument `lower.tail = FALSE` toe.
+Verder kan je ook aangeven wat het gemiddelde en de standaarddeviatie is, je hoeft dus niet eerst de z-waarden uit te rekenen.
+Wil je nu weten welke fractie koeien tussen 542 en 545 kg is, voer dan de volgende code uit:
+
+```{r, eval=FALSE}
+pnorm(542, mean = 540, sd = 5, lower.tail = FALSE) - 
+  pnorm(545, mean = 540, sd = 5, lower.tail = FALSE)
+```
+
+Of korter:
+
+```{r, eval=FALSE}
+pnorm(542, 540, 5, lower.tail = FALSE) -
+  pnorm(545, 540, 5, lower.tail = FALSE)
+```
+
+```{exercise, koe1}
+Koeien, deel 1
+
+* Schets de normale verdeling van het gewicht van de koeien.
+* Geef met twee kleuren aan welke oppervlakken met bovenstaande code worden uitgerekend.
+
+```
+
+
+Stel, we willen weten welk deel van de populatie koeien minder dan 530 kg weegt.
+Het gaat dan om het rood gekleurde deel in onderstaande grafiek:
+
+```{r echo=FALSE}
+#Koeien, deel 2
+library(tidyverse)
+x <- (5200:5600)/10 
+y <- dnorm(x, mean = 540, sd = 5)
+koe <- tibble(x,y)
+koe %>% 
+  ggplot(aes(x,y)) +
+  geom_line() +
+  geom_ribbon(data=subset(koe, x<530.1), 
+              aes(ymin = 0, ymax = y), fill = "red") +
+  ylab("density") +
+  xlab("gewicht koe (kg)") +
+  theme_classic()
+
+```
+
+
+```{exercise, koe2}
+Koeien
+
+* Bereken de fractie koeien lichter dan 530 kg.
+
+```
+
+
+##Hypotheses toetsen
+Een boer vermoedt dat zijn koeien lichter zijn dan de gemiddelde Holsteiner-Friesian. 
+Hij zet een koe op de weegschaal, en leest 535 kg af.
+
+```{exercise, koe3}
+Koe, deel 3
+
+* Bereken m.b.v. `pnorm()` hoe waarschijnlijk het is dat je een koe hebt die 535 kg of minder weegt bij een populatiegemiddelde van 540 kg en standaarddeviatie van 5 kg.
+
+```
+
+Bovenstaande opgave is de essentie van een statistische toets:
+
+* Je stelt een nulhypothese op: $\mu_{gewicht} = 540 kg.
+* Je berekent de overschrijdingskans op minstens zo grote afwijking als dat je in de steekproef hebt gevonden.
+
+Blijkt je steekproef heel onwaarschijnlijk te zijn onder de nulhypothese, dan verwerp je deze, en neem je de alternatieve hypothese aan.
+In dit geval gaat het om een eenzijdige toets (de boer denkt dat zijn koeien lichter zijn).
+
+In het geval dat de boer vermoedt dat het gewicht **afwijkt** van Holstein-Friesians, dan hebben we het over een tweezijdige toets.
+De kans op een minstens zo grote afwijking als gevonden kan twee kanten op zijn:
+
+* lichter dan 535 kg
+* zwaarder dan 545 kg
+
+Hieronder is die kans geïllustreerd:
+
+```{r echo=FALSE}
+
+koe %>% 
+  ggplot(aes(x,y)) +
+  geom_line() +
+  geom_ribbon(data=subset(koe, x<535.1), aes(ymin = 0, ymax = y), 
+              fill = "red") +
+  geom_ribbon(data=subset(koe, x>544.9), aes(ymin = 0, ymax = y), 
+              fill = "red") +
+  xlab("gewicht koe (kg)") +
+  ylab("dichtheid") 
+
+```
+
+Je ziet dus dat als je tweezijdig toetst, de waarschijnlijk dat minstens zo'n grote afwijking voorkomt, twee keer zo groot is dan als je eenzijdig toetst.
+Met tweezijdig toetsen verwerp je dus minder snel de H~0~!
+
+
+##Steekproefgrootte
+De boer slaat er zijn statistiekaantekeningen op na, en komt tot de conclusie dat hij een grotere steekproef moet nemen.
+Hij zet 6 koeien op een weegbrug en leest 3216 kg af, dus het steekproefgemiddelde is 536 kg.
+
+```{exercise, koe4}
+Koe, deel 4
+
+* De standaarddeviatie voor het gewicht van één Holstein-Friesiankoe is 5 kg. Wat wordt de standaarddeviatie voor een steekproef van 6 koeien?
+* Bereken met deze standaarddeviatie de waarschijnlijk dat je een gemiddelde uit je steekproef van maximaal 536 kg krijgt (als de H~0~: $\mu = 540 kg$ waar is).
+* Bereken de waarschijnlijkheid als je tweezijdig toetst.
+
+```
+

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Minimale steekproefgrootte | Stat1: statistische modellen</title>
+  <meta name="description" content="Minimale steekproefgrootte | Stat1: statistische modellen">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Minimale steekproefgrootte | Stat1: statistische modellen" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Minimale steekproefgrootte | Stat1: statistische modellen" />
+  
+  
+  
+
+<meta name="author" content="Mark Smits">
+
+
+<meta name="date" content="2019-05-08">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="eenzijdig-en-tweezijdig-toetsen.html">
+<link rel="next" href="simuleren.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Voorwoord</a><ul>
+<li class="chapter" data-level="" data-path="opzet.html"><a href="opzet.html"><i class="fa fa-check"></i>Opzet</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="werkcollege-1-statistische-vragen-bij-grafieken.html"><a href="werkcollege-1-statistische-vragen-bij-grafieken.html"><i class="fa fa-check"></i>Werkcollege 1: Statistische vragen bij grafieken</a><ul>
+<li class="chapter" data-level="" data-path="soorten-grafieken.html"><a href="soorten-grafieken.html"><i class="fa fa-check"></i>Soorten grafieken</a></li>
+<li class="chapter" data-level="" data-path="soorten-data.html"><a href="soorten-data.html"><i class="fa fa-check"></i>Soorten data</a></li>
+<li class="chapter" data-level="" data-path="statistische-vragen.html"><a href="statistische-vragen.html"><i class="fa fa-check"></i>Statistische vragen</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="werkcollege-2-statistische-toetsen.html"><a href="werkcollege-2-statistische-toetsen.html"><i class="fa fa-check"></i>Werkcollege 2: Statistische toetsen</a><ul>
+<li class="chapter" data-level="" data-path="hypotheses.html"><a href="hypotheses.html"><i class="fa fa-check"></i>Hypotheses</a></li>
+<li class="chapter" data-level="" data-path="type-i-en-type-ii-fouten.html"><a href="type-i-en-type-ii-fouten.html"><i class="fa fa-check"></i>Type I en type II fouten</a></li>
+<li class="chapter" data-level="" data-path="eenzijdig-en-tweezijdig-toetsen.html"><a href="eenzijdig-en-tweezijdig-toetsen.html"><i class="fa fa-check"></i>Eenzijdig en tweezijdig toetsen</a></li>
+<li class="chapter" data-level="" data-path="minimale-steekproefgrootte.html"><a href="minimale-steekproefgrootte.html"><i class="fa fa-check"></i>Minimale steekproefgrootte</a></li>
+<li class="chapter" data-level="" data-path="simuleren.html"><a href="simuleren.html"><i class="fa fa-check"></i>Simuleren</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Stat1: statistische modellen</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="minimale-steekproefgrootte" class="section level2">
+<h2>Minimale steekproefgrootte</h2>
+<p>De power van een statistische toets is de kans dat, als de nul-hypothese <strong>niet</strong> waar, deze ook verworpen wordt. Dat is dus 1 - de kans op een fout van de tweede soort.</p>
+<p>De power wil je zo hoog mogelijk hebben, het liefst boven de 80%. Er zijn twee factoren die de power sterk beinvloeden:</p>
+<ul>
+<li>De steekproefgrootte</li>
+<li>Het <strong>echte</strong> verschil tussen de groepen</li>
+</ul>
+<p>Er zijn online tools om de power van een statistische toets te berekenen:</p>
+<p><a href="https://www.stat.ubc.ca/~rollin/stats/ssize/" class="uri">https://www.stat.ubc.ca/~rollin/stats/ssize/</a></p>
+<p>Zo’n tool kan je gebruiken om te schatten hoeveel herhalingen je nodig hebt voor je experiment. Je weet natuurlijk niet, voordat je een experiment uitvoert, of er echt een verschil is (en dus hoe groot dat verschil is), maar meestal heb je wel een idee welk minimaal verschil nog interessant is om überhaupt aan te tonen.</p>
+
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-4" class="exercise"><strong>Opdracht 3  </strong></span>Power</p>
+<p>Volgens het CBS zijn hogeropgeleide mannen gemiddeld 3 cm langer dan laagopgeleide mannen van 20 jaar en ouder. Stel: we willen aantonen dat de mannelijke HAS-studenten gemiddeld meer dan 1 cm langer zijn de gemiddelde lengte (180 cm). Uit een voorgaande steekproef komt een standaardeviatie van 6 cm.</p>
+<ul>
+<li>Gebruik de online tool om de minimale steekproefgrootte te berekenen (selecteer <em>Comparing a mean to a known value</em>)</li>
+</ul>
+</div>
+<p></p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="eenzijdig-en-tweezijdig-toetsen.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="simuleren.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"collapse": "subsection"
+});
+});
+</script>
+
+</body>
+
+</html>

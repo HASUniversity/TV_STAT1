@@ -1,0 +1,1276 @@
+\documentclass[]{book}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Stat1: statistische modellen},
+            pdfauthor={Mark Smits},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{{#1}}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{{#1}}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{{#1}}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{{#1}}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
+\newcommand{\ImportTok}[1]{{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{{#1}}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{{#1}}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{{#1}}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{{#1}}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{{#1}}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{{#1}}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{{#1}}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{{#1}}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{{#1}}}}
+\newcommand{\BuiltInTok}[1]{{#1}}
+\newcommand{\ExtensionTok}[1]{{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{{#1}}}
+\newcommand{\RegionMarkerTok}[1]{{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{{#1}}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{{#1}}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\NormalTok}[1]{{#1}}
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Stat1: statistische modellen}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Mark Smits}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{2019-07-10}
+
+\usepackage{booktabs}
+
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+\newtheorem{corollary}{Corollary}[chapter]
+\newtheorem{proposition}{Proposition}[chapter]
+\newtheorem{conjecture}{Conjecture}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\theoremstyle{definition}
+\newtheorem{example}{Example}[chapter]
+\theoremstyle{definition}
+\newtheorem{exercise}{Opdracht}[chapter]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{solution}{Solution}
+\let\BeginKnitrBlock\begin \let\EndKnitrBlock\end
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\chapter*{Voorwoord}\label{voorwoord}
+\addcontentsline{toc}{chapter}{Voorwoord}
+
+Afgelopen blok hebben jullie al aardig wat data verzameld met practica,
+en de meeste ook al met hun bioxperience-project. In dit blok leren
+jullie om op basis van data betrouwbare uitspraken te doen. Zoals je
+gemerkt zult hebben in de practica, krijgt iedere groep een iets andere
+uitkomst uit precies hetzelfde experiment. Wat is nu de waarheid?
+Statistiek is ervoor om de betrouwbaarheid van de uitkomsten te
+berekenen. Op die manier weet je wat je wel en niet kan beweren op basis
+van je onderzoek.
+
+\section*{Opzet}\label{opzet}
+\addcontentsline{toc}{section}{Opzet}
+
+Blok 4 is opgebouwd uit zes werkcolleges van ieder anderhalf uur en een
+hoorcollege aan het eind. Ieder werkcollege begint met een korte
+inleiding over het onderwerp, gevolgd door een opdracht die je in
+groepjes uitvoert en mogelijk ook individuele opdrachten. Houd van de
+opdrachten een portfolio bij.
+
+We gaan dit blok het boek \emph{The Analysis of Biological Data}
+gebruiken. Jullie worden geacht \textbf{vooraf} de aangegeven
+hoofdstukken gelezen te hebben!
+
+\chapter{Werkcollege 1: Statistische vragen bij
+grafieken}\label{werkcollege-1-statistische-vragen-bij-grafieken}
+
+\BeginKnitrBlock{ABD}
+Lees Chapter 1 (\emph{Statistics and samples}):
+
+Lees Chapter 2 (\emph{Displaying data}):
+\EndKnitrBlock{ABD}
+
+\section{Soorten grafieken}\label{soorten-grafieken}
+
+Een grafiek is dé manier om data te presenteren. Het laat in één
+oogopslag zien wat voor patronen er in de data zitten. Verschillende
+soorten data vragen om verschillende soorten grafieken.
+
+Een aantal mogelijke soorten grafieken:
+
+\begin{itemize}
+\tightlist
+\item
+  Boxplot
+\item
+  Spreidingsdiagram
+\item
+  Staafdiagram
+\item
+  Taartdiagram/mozaiekplot
+\end{itemize}
+
+\BeginKnitrBlock{exercise}
+\protect\hypertarget{exr:figuren}{}{\label{exr:figuren} }Soorten figuren
+
+\begin{itemize}
+\tightlist
+\item
+  Zoek in de literatuur, die je verzameld hebt voor bioxperience, naar
+  voorbeelden voor ieder van bovenstaande typen figuren, en kopieer ze
+  naar je portfolio. Komt niet iedere soort grafiek voor, dan vindt je
+  op blackboard een serie artikelen waar ze wel in voorkomen.
+
+  \EndKnitrBlock{exercise}
+\end{itemize}
+
+Data op de juiste manier presenteren is de eerste stap in het analyseren
+van je data.
+
+\section{Soorten data}\label{soorten-data}
+
+\BeginKnitrBlock{exercise}
+\protect\hypertarget{exr:dataniveaus}{}{\label{exr:dataniveaus} }Soorten
+data
+
+Data kan verdeeld worden in drie niveau's.
+
+\begin{itemize}
+\tightlist
+\item
+  Zoek in \emph{Analysis of Biological Data} op welke niveau's dat zijn,
+  noteer ze in je portfolio.
+\item
+  Benoem de niveaus van de data in de figuren die je in de vorige
+  opdracht hebt verzameld.
+
+  \EndKnitrBlock{exercise}
+\end{itemize}
+
+\section{Statistische vragen}\label{statistische-vragen}
+
+Achter ieder onderzoek, en dus ook achter iedere dataset, zitten een of
+meerdere onderzoeksvragen. De kunst is om een figuur zo op te zetten dat
+de vraag daarmee beantwoord kan worden. Een onderzoeksvraag wordt
+daarmee automatisch ook een statistische vraag omdat je met data uit een
+steekproef werkt. Daarmee heb je te maken met onzekerheid.
+
+\BeginKnitrBlock{exercise}
+\protect\hypertarget{exr:onderzoeksvragen}{}{\label{exr:onderzoeksvragen}
+}Onderzoeksvragen
+
+\begin{itemize}
+\tightlist
+\item
+  Zoek uit welke onderzoeksvragen horen bij de figuren die je hebt
+  uitgezocht in de vorige opdrachten.
+\item
+  Zoek uit (tip: check materiaal en methode) welke statistische toets
+  gebruikt is om de onderzoeksvraag te beantwoorden.
+\item
+  Wat is de conclusie van de statistische toets?
+\item
+  Noteer alle antwoorden in je portfolio.
+
+  \EndKnitrBlock{exercise}
+\end{itemize}
+
+\BeginKnitrBlock{exercise}
+\protect\hypertarget{exr:oef_h1_2}{}{(\#exr:oef\_h1\_2) }Maak de
+volgende opgaven uit het boek:
+
+\begin{itemize}
+\tightlist
+\item
+  1.2
+\item
+  2.6
+\item
+  2.8
+\item
+  2.11
+\item
+  2.15
+
+  \EndKnitrBlock{exercise}
+\end{itemize}
+
+\chapter{Werkcollege 2: Statistische
+toetsen}\label{werkcollege-2-statistische-toetsen}
+
+\BeginKnitrBlock{ABD}
+Lees Chapter 6 (\emph{Hypothesis testing})
+\EndKnitrBlock{ABD}
+
+Belangrijkste leerdoelen:
+
+\begin{itemize}
+\tightlist
+\item
+  Hypotheses kunnen opstellen
+\item
+  Kunnen omschrijven wat de p-waarde is die uit een statistische toets
+  rolt
+\item
+  Begrijpen wat fouten van eerste (type I) en tweede (type II) soort
+  zijn.
+\end{itemize}
+
+\section{Hypotheses}\label{hypotheses}
+
+Statistische toetsen zijn ontwikkeld om helder te krijgen hoe
+betrouwbaar een bepaalde uitspraak is. In blok 2 hebben jullie geleerd
+om vanuit een steekproef het betrouwbaarheidsinterval te berekenen van
+het gemiddelde. Je geeft daarmee aan dat het gemiddelde, met een
+bepaalde waarschijnlijkheid (meestal 95\%) tussen een minimale en
+maximale waarde zit.
+
+Met een statistische toets, doe je precies het omgekeerde. In plaats van
+het bepalen van het betrouwbaarheidsinterval, bepaal je de
+waarschijnlijkheid dat iets gelijk is aan een preciese waarde (je
+veronderstelling). De vergelijking die je maakt wordt de nul-hypothese
+genoemd. Wanneer het helemaal niet waarschijnlijk is dat je
+nul-hypothese waar is, verwerp je deze. Je neemt dan de alternatieve
+hypothese aan. De alternatieve hypothese is nooit precies (bijv. het
+gemiddelde is niet gelijk aan 10).
+
+Meestal is de nul-hypothese niet jouw onderzoekshypothese! Meestal
+verwacht je een verschil tussen bijv. twee behandelingen, maar je
+nul-hypothese stelt dat er geen verschil is.
+
+\BeginKnitrBlock{exercise}
+\protect\hypertarget{exr:hypotheses}{}{\label{exr:hypotheses} }Hypotheses
+opstellen
+
+\begin{itemize}
+\item
+  Maak de volgende opgaven:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Opgave 15 (blz. 170)
+  \item
+    Opgave 16 (blz. 170)
+  \item
+    Ogave 17 (blz. 171)
+
+    \EndKnitrBlock{exercise}
+  \end{itemize}
+\end{itemize}
+
+\section{Type I en type II fouten}\label{type-i-en-type-ii-fouten}
+
+Je hoopt natuurlijk altijd de juiste conclusie te trekken uit je data.
+Helaas is dat niet altijd het geval. Gelukkig kunnen we met statistiek
+wel aangeven hoe betrouwbaar je conclusie is.
+
+De meeste kritieke fout is het ten onrechte verwerpen van de
+nul-hypothese: je toont een verschil aan die er niet is. De kans op deze
+fout wordt (bijna) standaard op 5\% gezet. De p-waarde geeft de
+waarschijnlijkheid dat de nul-hypothese \textbf{waar} is. Komt de
+p-waarde onder de 0,05 (=5\%), dan verwerpen we de nul-hypothese.
+
+Een irritante fout is als er echt wel een verschil is (dus de
+nul-hypothese is \textbf{niet} waar), maar je kan het niet aantonen. Dit
+wordt een fout van de tweede soort genoemd. Hoe strenger je bent voor de
+kans op een fout van de eerste soort, hoe groter de kans op een fout van
+de tweede soort (denk daar maar even over na!).
+
+\BeginKnitrBlock{exercise}
+\protect\hypertarget{exr:typefouten}{}{\label{exr:typefouten} }Type I en
+type II fouten
+
+\begin{itemize}
+\item
+  Beschrijf in eigen woorden de betekenis van:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    p-waarde
+  \item
+    fout van de eerste soort
+  \item
+    fout van de tweede soort
+
+    \EndKnitrBlock{exercise}
+  \end{itemize}
+\end{itemize}
+
+\section{Eenzijdig en tweezijdig
+toetsen}\label{eenzijdig-en-tweezijdig-toetsen}
+
+Als je wilt testen of er een verschil is tussen twee groepen, dan test
+je tweezijdig. Het maakt niet uit welke van de twee groter is, als er
+maar verschil is.
+
+Soms ben je alleen geïnteresseerd of er een verschil in één richting is,
+bijv. of biologen hoger scoren voor biologie dan voor wiskunde. Dan ben
+je eenzijdig aan het toetsen.
+
+\section{Simuleren}\label{simuleren}
+
+De beste manier om begrip te krijgen van statistische toetsen, is om met
+data te simuleren. R is hier ideaal voor. Met de functie
+\texttt{sample()} kan je een random sample nemen uit een populatie:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{steekproef1 <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"links"}\NormalTok{, }\StringTok{"rechts"}\NormalTok{), }\DecValTok{18}\NormalTok{, }\DataTypeTok{replace =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+De functie \texttt{sample()} heeft in bovenstaand voorbeeld 3
+\textbf{argumenten}. Het eerste argument is een \textbf{vector} met de
+mogelijke waarden in de populatie, het tweede argument geeft de grootte
+van de steekproef en het derde argument geeft aan dat er een oneindige
+populatie is met ``links''- en``rechts''-waarden. De functie neemt aan
+dat ``links'' en ``rechts'' beiden evenveel voorkomen.
+
+Met de table-functie kan je gemakkelijk checken hoeveel rechtshandige
+padden er in de steekproef zitten:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{table}\NormalTok{(steekproef1)}
+\end{Highlighting}
+\end{Shaded}
+
+\BeginKnitrBlock{exercise}
+\protect\hypertarget{exr:steekproef}{}{\label{exr:steekproef} }Steekproef
+
+\begin{itemize}
+\tightlist
+\item
+  Gebruik bovenstaande code om een steekproef te nemen van 18 padden
+\item
+  Geef het aantal rechtshandige padden door aan de docent. Of via de
+  volgende link
+
+  \EndKnitrBlock{exercise}
+\end{itemize}
+
+Stel dat er wel een voorkeur voor rechtshandigheid is bij padden. Zeg
+dat 80\% van de padden rechtshandig is.
+
+Met een iets aangepaste code kunnen we weer een steekproef nemen, maar
+nu van deze populatie:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{steekproef2 <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"links"}\NormalTok{, }\StringTok{"rechts"}\NormalTok{), }\DecValTok{18}\NormalTok{, }\DataTypeTok{replace =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{prob =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.2}\NormalTok{, }\FloatTok{0.8}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\BeginKnitrBlock{exercise}
+\protect\hypertarget{exr:steekproef2}{}{\label{exr:steekproef2} }Steekproef2
+
+\begin{itemize}
+\tightlist
+\item
+  Neem nu een steekproef van de populatie padden met 80\%
+  rechtshandigheid.
+\item
+  Geef het aantal rechtshandige padden door aan de docent. Of via de
+  link.
+
+  \EndKnitrBlock{exercise}
+\end{itemize}
+
+Je ziet dat het moeilijk is om de juiste conclusie te trekken uit een
+steekproef. Er zit altijd een mate van onzekerheid omheen.
+
+De oplossing is om die onzekerheid goed te omschrijven. Met een
+statistische toets neem je de kansverdeling onder de nulhypothese als
+basis. In het geval van de padden gaan we onder de nulhypothese er van
+uit dat er geen verschil is tussen kans op links- of rechtshandigheid
+bij padden. Met R code kunnen we die kansverdeling berekenen en in een
+histogram weergeven:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+
+\CommentTok{#10000 steekproeven nemen, resultaat is een matrix}
+\NormalTok{samples <-}\StringTok{ }\KeywordTok{replicate}\NormalTok{(}\DecValTok{10000}\NormalTok{, }\KeywordTok{sample}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"links"}\NormalTok{, }\StringTok{"rechts"}\NormalTok{), }\DecValTok{18}\NormalTok{, }\DataTypeTok{replace =} \OtherTok{TRUE}\NormalTok{))}
+\CommentTok{#Matrix omzetten naar een dataframe}
+\NormalTok{samples <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(samples) %>%}\StringTok{ }\KeywordTok{gather}\NormalTok{(}\DataTypeTok{key =} \StringTok{"steekproef"}\NormalTok{, }\DataTypeTok{value =} \StringTok{"voorkeur"}\NormalTok{)}
+
+\CommentTok{#Aantal rechtshandigen per steekproef}
+\NormalTok{rechts <-}\StringTok{ }\NormalTok{samples %>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(voorkeur ==}\StringTok{ "rechts"}\NormalTok{) %>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(steekproef) %>%}\StringTok{ }
+\StringTok{  }\KeywordTok{count}\NormalTok{()}
+
+\CommentTok{#Histogram maken van het gevonden aantal rechtshandige padden per steekproef}
+\NormalTok{rechts %>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(n)) +}
+\StringTok{  }\KeywordTok{geom_histogram}\NormalTok{(}\DataTypeTok{binwidth =} \DecValTok{1}\NormalTok{, }\DataTypeTok{center =} \DecValTok{0}\NormalTok{, }
+    \DataTypeTok{fill =} \StringTok{"white"}\NormalTok{, }\DataTypeTok{colour =} \StringTok{"black"}\NormalTok{) +}
+\StringTok{  }\KeywordTok{xlab}\NormalTok{(}\StringTok{"aantal rechtshandige padden"}\NormalTok{) +}
+\StringTok{  }\KeywordTok{theme_classic}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+Met de volgende functie kan je de kans berekenen (onder de nulhypothese)
+op minstens het aantal rechtshandige padden, als in je eigen steekproef
+(als voorbeeld minstens 14):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Op basis van gesimuleerde kansverdeling}
+\KeywordTok{sum}\NormalTok{(rechts$n>=}\DecValTok{14}\NormalTok{)/}\KeywordTok{length}\NormalTok{(rechts$n)}
+
+\CommentTok{#Op basis van theoretische kansverdeling}
+\KeywordTok{binom.test}\NormalTok{(}\DecValTok{14}\NormalTok{,}\DecValTok{18}\NormalTok{, }\DataTypeTok{alternative =} \StringTok{"greater"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\BeginKnitrBlock{exercise}
+\protect\hypertarget{exr:stattoets}{}{\label{exr:stattoets} }Statistische
+toets
+
+\begin{itemize}
+\tightlist
+\item
+  Gebruik bovenstaande code om uit te rekenen wat de kans is op minstens
+  zoveel rechtshandige padden als je gevonden hebt in je steekproef (doe
+  dat voor beide steekproeven).
+\item
+  Stel de drempelwaarde van de kans op fout van de eerste soort op 0,05.
+  Wat is dan je conclusie bij beide steekproeven. Geef dat door aan de
+  docent. Of via de link.
+\item
+  Als iedereen het heeft uitgevoerd:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Hoeveel procent van de studenten verwerpt ten onrechte de
+    nul-hypothese van de eerste steekproef (type I fout)?
+  \item
+    Hoeveel procent van de studenten verwerpt niet de nulhypothese (type
+    II fout)?
+
+    \EndKnitrBlock{exercise}
+  \end{itemize}
+\end{itemize}
+
+\BeginKnitrBlock{exercise}
+\protect\hypertarget{exr:oefeningen_H6}{}{(\#exr:oefeningen\_H6) } * 6.1
+* 6.2 * 6.3 * 6.7 * 6.8 * 6.10 * 6.12
+\EndKnitrBlock{exercise}
+
+\chapter{Normale verdeling}\label{normale-verdeling}
+
+\BeginKnitrBlock{ABD}
+Lees Chapter 10 (\emph{Normal distribution}), behalve 10.2, 10.4 en
+10.7.
+\EndKnitrBlock{ABD}
+
+Zoals jullie in blok 2 hebben geleerd, gedraagt veel variatie zich op
+een karakteristieke manier die omschreven kan worden als de
+\textbf{normale verdeling}.
+
+Ter illustratie hieronder een histogram van de gemiddelde cijfers van
+het HAVO-eindexamen biologie per school weergegeven. Je ziet dat de
+verdeling min of meer een normale verdeling volgt (de zwarte lijn).
+
+\includegraphics{{[}03{]}_normal_distribution_files/figure-latex/unnamed-chunk-2-1.pdf}
+
+\BeginKnitrBlock{exercise}
+\protect\hypertarget{exr:nverdeling}{}{\label{exr:nverdeling} }normale
+verdeling
+
+\begin{itemize}
+\tightlist
+\item
+  Op basis van welke twee parameters is bovenstaande normale verdeling
+  gebaseerd?
+\end{itemize}
+\EndKnitrBlock{exercise}
+
+\section{R als alternatief voor een
+tabel}\label{r-als-alternatief-voor-een-tabel}
+
+In blok 2 heb je, met behulp van een tabel, de volgende vraag op kunnen
+lossen:
+
+\begin{quote}
+Koeien van het ras Holstein-Friesian hebben gemiddeld een gewicht van
+540 kg, met een standaarddeviatie van 5 kg. De vraag is: Hoe hoog is de
+fractie koeien van het ras Holstein-Friesian met een gewicht tussen 542
+en 545 kg?
+\end{quote}
+
+Hoe pakte je dat aan in blok 2? Het gaat om de volgende verdeling:
+\(\underline{x} \sim N(\mu=540, \sigma=5)\). Fractie koeien tussen 542
+en 545 kg: \(P(542<\underline{x}<545)\).
+
+Volgende stap is omrekenen naar de standaard normale verdeling, je
+berekent dan de z-waardes van 542 en 545 kg:
+\(P \left( \frac{542-540}{5}<Z< \frac{545-540}{5} \right)\).
+
+Vervolgens zoek je in de tabel de kans op
+\(P \left( Z>\frac{2}{5} \right)\) en \(P \left( Z>\frac{5}{5} \right)\)
+en trek deze van elkaar af: \(0.3446-0.1587 = 0.1859\)
+
+In plaats van de tabel, kan je ook R-code gebruiken: \texttt{pnorm()}.
+NB: deze functie berekent standaard
+\(P \left( \underline{x}<q \right)\), dus de \emph{lower tail} als je
+een normale verdeling bekijkt. Wil je het oppervlak aan de rechterkant
+van q weten, voeg dan het argument \texttt{lower.tail\ =\ FALSE} toe.
+Verder kan je ook aangeven wat het gemiddelde en de standaarddeviatie
+is, je hoeft dus niet eerst de z-waarden uit te rekenen. Wil je nu weten
+welke fractie koeien tussen 542 en 545 kg is, voer dan de volgende code
+uit:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{pnorm}\NormalTok{(}\DecValTok{542}\NormalTok{, }\DataTypeTok{mean =} \DecValTok{540}\NormalTok{, }\DataTypeTok{sd =} \DecValTok{5}\NormalTok{, }\DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{) -}\StringTok{ }
+\StringTok{  }\KeywordTok{pnorm}\NormalTok{(}\DecValTok{545}\NormalTok{, }\DataTypeTok{mean =} \DecValTok{540}\NormalTok{, }\DataTypeTok{sd =} \DecValTok{5}\NormalTok{, }\DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Of korter:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{pnorm}\NormalTok{(}\DecValTok{542}\NormalTok{, }\DecValTok{540}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{) -}
+\StringTok{  }\KeywordTok{pnorm}\NormalTok{(}\DecValTok{545}\NormalTok{, }\DecValTok{540}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\BeginKnitrBlock{exercise}
+\protect\hypertarget{exr:koe1}{}{\label{exr:koe1} }Koeien, deel 1
+
+\begin{itemize}
+\tightlist
+\item
+  Schets de normale verdeling van het gewicht van de koeien.
+\item
+  Geef met twee kleuren aan welke oppervlakken met bovenstaande code
+  worden uitgerekend.
+\end{itemize}
+\EndKnitrBlock{exercise}
+
+Stel, we willen weten welk deel van de populatie koeien minder dan 430
+kg weegt. Het gaat dan om het rood gekleurde deel in onderstaande
+grafiek:
+
+\includegraphics{{[}03{]}_normal_distribution_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+\BeginKnitrBlock{exercise}
+\protect\hypertarget{exr:koe2}{}{\label{exr:koe2} }Koeien
+
+\begin{itemize}
+\tightlist
+\item
+  Bereken de fractie koeien lichter dan 430 kg.
+\end{itemize}
+\EndKnitrBlock{exercise}
+
+\section{Hypotheses toetsen}\label{hypotheses-toetsen}
+
+Een boer vermoedt dat zijn koeien lichter zijn dan de gemiddelde
+Holsteiner-Friesian. Hij zet een koe op de weegschaal, en leest 535 kg
+af.
+
+\BeginKnitrBlock{exercise}
+\protect\hypertarget{exr:koe3}{}{\label{exr:koe3} }Koe, deel 3
+
+\begin{itemize}
+\tightlist
+\item
+  Bereken m.b.v. pnorm() hoe waarschijnlijk het is dat je een koe hebt
+  die 535 kg of minder weegt bij een populatiegemiddelde van 540 kg en
+  standaarddeviatie van 5 kg.
+\end{itemize}
+\EndKnitrBlock{exercise}
+
+Bovenstaande opgave is de essentie van een statistische toets. Je stelt
+een nulhypothese op:
+
+\begin{quote}
+Het gewicht van de koeien van de boer wijkt niet af van het gewicht van
+Holstein-Friesian koeien.
+\end{quote}
+
+Blijkt je steekproef heel onwaarschijnlijk te zijn onder de
+nulhypothese, dan verwerp je deze, en neem je de alternatieve hypothese
+aan. In dit geval gaat het om een eenzijdige toets (de boer denkt dat
+zijn koeien lichter zijn).
+
+In het geval dat de boer vermoedt dat het gewicht \textbf{afwijkt} van
+Holstein-Friesians, dan hebben we het over een tweezijdige toets. De
+kans op een minstens zo grote afwijking als gevonden kan twee kanten op
+zijn:
+
+\begin{itemize}
+\tightlist
+\item
+  lichter dan 535 kg
+\item
+  zwaarder dan 545 kg
+\end{itemize}
+
+Hieronder is die kans geïllustreerd:
+
+\includegraphics{{[}03{]}_normal_distribution_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+Je ziet dus dat als je tweezijdig toetst, de waarschijnlijk dat minstens
+zo'n grote afwijking voorkomt, twee keer zo groot is dan als je
+eenzijdig toetst.
+
+De boer slaat er zijn statistiekaantekeningen op na, en komt tot de
+conclusie dat hij een grotere steekproef moet nemen. Hij zet 6 koeien op
+een weegbrug en leest 3216 kg af, dus het steekproefgemiddelde is 536
+kg.
+
+\BeginKnitrBlock{exercise}
+\protect\hypertarget{exr:koe4}{}{\label{exr:koe4} }Koe, deel 4
+
+\begin{itemize}
+\tightlist
+\item
+  De standaarddeviatie voor het gewicht van één Holstein-Friesiankoe is
+  5 kg. Wat wordt de standaarddeviatie voor een steekproef van 6 koeien?
+\item
+  Bereken, met deze standaarddeviatie de waarschijnlijk van maximaal een
+  gemiddeld gewicht van 536 als de nulhypothese waar is?
+\item
+  Bereken de waarschijnlijkheid als je tweezijdig toetst.
+\end{itemize}
+\EndKnitrBlock{exercise}
+
+\chapter{t-toets voor één steekproef}\label{t-toets-voor-een-steekproef}
+
+\BeginKnitrBlock{ABD}
+Lees Paragraph 11.3 (\emph{The one-sample t-test})
+\EndKnitrBlock{ABD}
+
+\section{Geschatte standaarddeviatie}\label{geschatte-standaarddeviatie}
+
+In de vorige les hebben jullie met de normale verdeling gerekend.
+Hiermee kan je de waarschijnlijkheid berekenen of een bepaalde
+steekproef afwijkt van een theoretische waarde.
+
+Allemaal leuk in theorie, maar de praktijk is weerbarstig. Dat is niet
+omdat variatie zich niet volgens een normale kansverdeling gedraagt,
+maar omdat je de standaarddeviatie schat aan de hand van je steekproef.
+
+Als voorbeeld gebruiken we weer het gewicht van de koeien. Het gewicht
+is gemiddeld 540 kg met een standaarddeviatie van 5 kg.
+
+\BeginKnitrBlock{exercise}
+\protect\hypertarget{exr:stdev}{}{\label{exr:stdev} }standaardeviatie
+schatten
+
+\begin{itemize}
+\tightlist
+\item
+  Voer de volgende functie uit:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{s\ \textless{}-\ replicate(10000,\ sd(rnorm(3,\ 540,\ 5)))}
+  \end{itemize}
+\item
+  Nu heb je 10000 keer een steekproef getrokken uit de populatie van de
+  koeien, en van iedere steekproef heb je de standaarddeviatie berekend.
+  Maak hier nu een histogram van (op de snelle manier):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{hist(s)}
+  \end{itemize}
+\item
+  Wat valt je op?
+\end{itemize}
+\EndKnitrBlock{exercise}
+
+\section{Z-toets}\label{z-toets}
+
+Zoals je in de vorige oefening zag, is gemiddeld je schatting van de
+standaarddeviatie kleiner dan de werkelijke standaarddeviatie.
+
+Als je dan, op basis van de geschatte standaarddeviatie, de
+kansverdeling van je nulhypothese opzet, dan is die klokvormige
+kansverdeling smaller dan in werkelijkheid. Dus verwerp je sneller je
+nulhypothese.
+
+Als voorbeeld weer de koeien.
+
+De volgende code voert 10000 keer een Z-toets uit op random steekproeven
+van n=3, met de juiste standaarddeviatie:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Functie om steekproef te nemen en z-toets erop uit te voeren}
+\NormalTok{z_sigma <-}\StringTok{ }\NormalTok{function(n, mean, sigma) \{}
+  \NormalTok{sample <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(n, mean, sigma)}
+  \NormalTok{p <-}\StringTok{ }\KeywordTok{pnorm}\NormalTok{(}\KeywordTok{mean}\NormalTok{(sample), mean, sigma/}\KeywordTok{sqrt}\NormalTok{(n))}
+\NormalTok{\}}
+
+\CommentTok{#10000 keer bovenstaande functie uitvoeren}
+\NormalTok{ps <-}\StringTok{ }\KeywordTok{replicate}\NormalTok{(}\DecValTok{10000}\NormalTok{, }\KeywordTok{z_sigma}\NormalTok{(}\DataTypeTok{n=}\DecValTok{3}\NormalTok{, }\DataTypeTok{mean=}\DecValTok{540}\NormalTok{, }\DataTypeTok{sigma=}\DecValTok{5}\NormalTok{))}
+
+\CommentTok{#welke fractie van de samples verwerpt (ten onrechte!) de H0?}
+\NormalTok{alpha=}\FloatTok{0.05}
+\KeywordTok{length}\NormalTok{(ps[ps<alpha])/}\KeywordTok{length}\NormalTok{(ps)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.0519
+\end{verbatim}
+
+\BeginKnitrBlock{exercise}
+\protect\hypertarget{exr:ztoets}{}{\label{exr:ztoets} }Z\_sigma
+
+\begin{itemize}
+\tightlist
+\item
+  Neem bovenstaande code over in een script, en voer uit.
+\item
+  Varieer met de \(\alpha\) en check of de fractie significant
+  afwijkende steekproeven de \alpha volgt.
+\end{itemize}
+\EndKnitrBlock{exercise}
+
+Stel nu dat we de standaarddeviatie van de populatie niet weten, dan
+moeten we die schatten vanuit de steekproef. Wat heeft dat voor
+consequenties voor de fout van de eerste soort (ten onrechte H0
+verwerpen)?
+
+Dat kan je testen met de volgende code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Functie om steekproef te nemen en z-toets erop uit te voeren}
+\NormalTok{z_sigma <-}\StringTok{ }\NormalTok{function(n, mean, sigma) \{}
+  \NormalTok{sample <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(n, mean, sigma)}
+  \NormalTok{p <-}\StringTok{ }\KeywordTok{pnorm}\NormalTok{(}\KeywordTok{mean}\NormalTok{(sample), mean, }\KeywordTok{sd}\NormalTok{(sample)/}\KeywordTok{sqrt}\NormalTok{(n))}
+\NormalTok{\}}
+
+\CommentTok{#10000 keer bovenstaande functie uitvoeren}
+\NormalTok{ps <-}\StringTok{ }\KeywordTok{replicate}\NormalTok{(}\DecValTok{10000}\NormalTok{, }\KeywordTok{z_sigma}\NormalTok{(}\DataTypeTok{n=}\DecValTok{3}\NormalTok{, }\DataTypeTok{mean=}\DecValTok{540}\NormalTok{, }\DataTypeTok{sigma=}\DecValTok{5}\NormalTok{))}
+
+\CommentTok{#welke fractie van de samples verwerpt (ten onrechte!) de H0?}
+\NormalTok{alpha=}\FloatTok{0.05}
+\KeywordTok{length}\NormalTok{(ps[ps<alpha])/}\KeywordTok{length}\NormalTok{(ps)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.1208
+\end{verbatim}
+
+\BeginKnitrBlock{exercise}
+\protect\hypertarget{exr:zstschat}{}{\label{exr:zstschat} }Z\_s
+
+\begin{itemize}
+\tightlist
+\item
+  Neem bovenstaande code over in een script, en voer uit.
+\item
+  Varieer met de \(\alpha\) en check of de fractie significant
+  afwijkende steekproeven de \(\alpha\) volgt.
+\item
+  Herhaal met n=30 (dus een steekproefgrootte van 30)
+\item
+  Wat is het verschil?
+\end{itemize}
+\EndKnitrBlock{exercise}
+
+\section{t-verdeling}\label{t-verdeling}
+
+In de vorige oefening zag je het effect van een te kleine schatting van
+je standaarddeviatie op het voorkomen van een type-1-fout (ten onrechte
+verwerpen van de Ho). Dit is vooral een probleem bij kleine
+steekproeven. In een beroemd wetenschappelijk artikel van een
+mederwerker van Guinness (onder pseudoniem \emph{Student}), wordt dit
+probleem uitgelegd en een oplossing gegeven. De oplossing is om een
+aangepaste kansverdeling te gebruiken: de \textbf{t-verdeling}:
+
+\includegraphics{{[}04{]}_one_sample_T-test_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+In rood is de t-verdeling en met een zwarte lijn is de normale verdeling
+geplot. Je ziet dat de staarten van de t-verdeling dikker zijn dan de
+normale verdeling. In de volgende paragraaf gaan we aan de slag met de
+t-toets die i.t.t. de z-toets wel rekening houdt met het effect van
+steekproefgrootte op de kansverdeling.
+
+\section{one-sample t-test in R}\label{one-sample-t-test-in-r}
+
+De functie voor de t-toets in R is \texttt{t.test()}. Deze functie heeft
+als \emph{argument} een vector (rij data) nodig. Daarnaast kan je onder
+andere de volgende opties aangeven:
+
+\begin{itemize}
+\tightlist
+\item
+  mu = \ldots{} (een getal waartegen je de dataset test, standaard is 0)
+\item
+  alternative = (kies uit ``greater'' of ``less'' als je eenzijdig wilt
+  testen)
+\end{itemize}
+
+Als voorbeeld willen we testen of het gemiddelde voor biocalculus1 hoger
+ligt dan 6:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(readxl)}
+\NormalTok{cijfers <-}\StringTok{ }\KeywordTok{read_excel}\NormalTok{(}\StringTok{"../data/cijfers.xlsx"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{t.test}\NormalTok{(cijfers$biocalculus, }\DataTypeTok{mu=}\DecValTok{6}\NormalTok{, }\DataTypeTok{alternative =} \StringTok{"greater"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  One Sample t-test
+## 
+## data:  cijfers$biocalculus
+## t = 3.3258, df = 205, p-value = 0.0005223
+## alternative hypothesis: true mean is greater than 6
+## 95 percent confidence interval:
+##  6.215195      Inf
+## sample estimates:
+## mean of x 
+##   6.42767
+\end{verbatim}
+
+In bovenstaande output zie je de berekende t-waarde (\emph{t}), het
+aantal vrijheidsgraden (\emph{df}) en de p-waarde (\emph{p-value}).
+Verder ook het betrouwbaarheidsinterval (die voor een eenzijdige toets
+naar oneindig loopt (\emph{inf}) en het gemiddelde van de steekproef.
+
+Om te checken of de t-toets wel een betrouwbare p-waarde geeft voor de
+waarschijnlijkheid dat de H0 waar is, kan je de volgende code uitvoeren:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Nu met t-toets}
+\NormalTok{ttoets <-}\StringTok{ }\NormalTok{function(n, mu, sigma) \{}
+  \NormalTok{sample <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(n, mu, sigma)}
+  \KeywordTok{return}\NormalTok{(}\KeywordTok{t.test}\NormalTok{(sample, }\DataTypeTok{mu=}\NormalTok{mu)$p.value)}
+\NormalTok{\}}
+
+\CommentTok{#10000 keer bovenstaande functie uitvoeren}
+\NormalTok{tp <-}\StringTok{ }\KeywordTok{replicate}\NormalTok{(}\DecValTok{10000}\NormalTok{, }\KeywordTok{ttoets}\NormalTok{(}\DataTypeTok{n=}\DecValTok{3}\NormalTok{, }\DataTypeTok{mu=}\DecValTok{540}\NormalTok{, }\DataTypeTok{sigma=}\DecValTok{5}\NormalTok{)) }
+
+\CommentTok{#Fractie gevallen waarin H0 ten onrechte wordt verworpen}
+\NormalTok{alpha <-}\StringTok{ }\FloatTok{0.05}
+\KeywordTok{length}\NormalTok{(tp[tp<alpha])/}\KeywordTok{length}\NormalTok{(tp)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.0492
+\end{verbatim}
+
+In 1996 heeft statistiekdocent Allen Shoemaker een dataset met
+lichaamstemperatuur, hartslag en geslacht van 130 studenten
+gepubliceerd. Op blackboard vind je een naar Celsius omgerekende versie
+hiervan.
+
+\BeginKnitrBlock{exercise}
+\protect\hypertarget{exr:onesamplettest}{}{\label{exr:onesamplettest}
+}Eenzijdige t-toets
+
+\begin{itemize}
+\tightlist
+\item
+  Test met een eenzijdige t-toets of de gemiddelde lichaamstemperatuur
+  afwijkt van 37°.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Schrijf eerste de nulhypothese en alternatieve hypothese op.
+  \item
+    Voer de toets en geef de conclusie.
+  \end{itemize}
+\end{itemize}
+\EndKnitrBlock{exercise}
+
+\chapter{Gepaarde t-toets}\label{gepaarde-t-toets}
+
+\BeginKnitrBlock{ABD}
+Lees Paragraph 12.1 (\emph{Paired sample versus two independent
+samples})
+
+Lees Paragraph 12.2 (\emph{Paired comparison of means})
+\EndKnitrBlock{ABD}
+
+Met een enkelvoudige t-toets (\emph{one-sample t-test}) bereken je de
+overschrijdingskans van een steekproef t.o.v. een \textbf{normaal}
+verdeelde waarde. Een voorbeeld van vorige week: ``wat is de kans op een
+gemiddeld gewicht van een steekproef van 5 koeien van kleiner of gelijk
+aan 530 kg, aangenomen dat een koe gemiddeld 540 kg weegt?''.
+
+In de vorige les hebben jullie ontdekt dat de kansverdeling van een
+steekproefgemiddelde alleen een normale verdeling volgt als je van
+tevoren weet wat de standaarddeviatie is in je populatie. Wanneer je dat
+niet weet, en de standaarddeviatie schat aan de hand van je steekproef,
+dan wijkt de verdeling iets af van de normale verdeling. Deze
+kansverdeling volgt een t-verdeling. Door een t-toets te gebruiken,
+i.p.v. een z-toets, kan je wel de juiste overschrijdingskans berekenen.
+
+\section{Gepaarde data}\label{gepaarde-data}
+
+De \emph{one-sample t-test} kan je ook gebruiken als je verschillen
+tussen twee behandelingen wil laten zien als de data \textbf{gepaard}
+is. Je laat bevoorbeeld studenten een wiskundetoets doen voor en na een
+paar glazen bier. Natuurlijk verwacht je dat je rekencapaciteit
+achteruit gaat na het drinken van bier (toch?), De hypotheses zijn:
+
+\begin{quote}
+H\textsubscript{0}: Score vóór drinken is gelijk aan score ná het
+drinken van bier.
+\end{quote}
+
+\begin{quote}
+H\textsubscript{1}: Score vóór drinken is lager dan score ná het drinken
+van bier.
+\end{quote}
+
+Onder de H\textsubscript{0} verwacht je dat de score voor en na het
+drinken van bier gemiddeld gelijk is. Met andere woorden: het verschil
+tussen voor en na is gemiddeld 0. Stap 1 is voor iedere student het
+verschil te berekenen tussen beide testen. Stap 2 is om te berekenen wat
+de overschrijdingskans is van deze uitkomst als de H\textsubscript{0}
+waar is. Dat doe je met een \emph{one-sample t-test}.
+
+Maar deze twee stappen kan je ook in één keer uitvoeren met een gepaarde
+t-toets (\emph{paired t-test}).
+
+\section{Gepaarde t-toets}\label{gepaarde-t-toets-1}
+
+Belangrijk met gepaarde data is dat het helder is welke metingen bij
+elkaar horen. Dat doe je door op de volgende manier je data te ordenen:
+
+\begin{tabular}{r|r|r}
+\hline
+student & voor & na\\
+\hline
+1 & 7 & 5\\
+\hline
+2 & 4 & 4\\
+\hline
+3 & 6 & 5\\
+\hline
+4 & 9 & 7\\
+\hline
+5 & 5 & 5\\
+\hline
+\end{tabular}
+
+Wanneer je de data ingelezen hebt in R (bijv. als objectnaam
+\texttt{bier}), kan je met de volgende functie een gepaarde t-toets
+uitvoeren:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{t.test}\NormalTok{(bier$voor, bier$na, }\DataTypeTok{paired =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\BeginKnitrBlock{exercise}
+\protect\hypertarget{exr:machomerels}{}{\label{exr:machomerels} }Macho
+merels
+
+\begin{itemize}
+\tightlist
+\item
+  Download met de volgende functie de data van de \emph{Red-winged
+  Blackbirds}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{blackbird\ \textless{}-\ read.csv(url("http://www.zoology.ubc.ca/\textasciitilde{}schluter/WhitlockSchluter/wp-content/data/chapter12/chap12e2BlackbirdTestosterone.csv"))}
+  \end{itemize}
+\item
+  Voor dezelfde toets uit als in het boek. Check evt. de opties voor de
+  functies via de code \texttt{?t.test}
+\end{itemize}
+\EndKnitrBlock{exercise}
+
+\BeginKnitrBlock{exercise}
+\protect\hypertarget{exr:oef_H11}{}{(\#exr:oef\_H11) }Maak de volgende
+oefeningen uit het boek:
+
+\begin{itemize}
+\tightlist
+\item
+  11.5
+\item
+  11.11
+\end{itemize}
+\EndKnitrBlock{exercise}
+
+\chapter{Onafhankelijke t-toets:}\label{onafhankelijke-t-toets}
+
+\BeginKnitrBlock{ABD}
+Lees Paragraph 12.3 (\emph{Two-sample comparison of means}) NB: je hoeft
+niet de berekeningen te kennen.
+\EndKnitrBlock{ABD}
+
+Bij een \emph{one-sample t-test} en een gepaarde t-toets heb je te maken
+met één rij data waarvan je wilt weten of het gemiddelde ervan
+significant afwijkt van een bepaalde waarde. Maar vaak heb je te maken
+met meerdere groepen waarvan je wilt weten of ze écht van elkaar
+verschillen. De nulhypothese is dan dat het gemiddelde van de groepen
+niet van elkaar verschillen. Dat is een subtiel verschil met de gepaarde
+t-toets waarbij je voor iedere herhaling verwacht dat eerste en tweede
+behandeling gelijk aan elkaar zijn.
+
+\BeginKnitrBlock{exercise}
+\protect\hypertarget{exr:welnietgepaard}{}{\label{exr:welnietgepaard}
+}Gepaard of niet?
+
+\begin{itemize}
+\tightlist
+\item
+  Los \emph{Practice problem} 12.4 (blz. 355) op
+\end{itemize}
+\EndKnitrBlock{exercise}
+
+\section{Standaarddeviatie}\label{standaarddeviatie}
+
+Bij een \emph{one-sample t-test} is het recht-toe-recht-aan om de
+standaarddeviatie te schatten. Je hebt één rij data waarvan je
+gemiddelde en steekproefstandaarddeviatie berekent. Aan de hand daarvan
+bepaal je hoe waarschijnlijk je afwijking is ten opzichte van je
+nulhypothese.
+
+In de traditionele \textbf{onafhankelijke t-toets} (\emph{independent
+t-test}) wordt de standaarddeviatie van het verschil in de gemiddelde
+waardes van beide groepen geschat via een gewogen gemiddelde van de
+standaarddeviaties in beide groepen. Dat werkt alleen als de
+standaarddeviatie niet te veel verschilt tussen de twee groepen.
+
+Verschilt de standaarddeviatie flink van elkaar, dan kan je bovenstaande
+aanpak niet gebruiken. Je moet dan een alternatieve toets gebruiken, de
+\textbf{Welch's t-toets}. Deze toets maakt niet de aanname dat de
+standaarddeviatie gelijk is in beide groepen.
+
+In de praktijk wordt tegenwoordig aangeraden om \textbf{altijd} de
+Welch's t-toets te gebruiken, tenzij je sterke aanwijzing hebt dat je de
+standaardeviaties voor beide groepen gelijk zijn. Zie ook het volgende
+\href{https://academic.oup.com/beheco/article/17/4/688/215960}{artikel}.
+
+\section{T-toets in R}\label{t-toets-in-r}
+
+De \emph{one-sample t-test}, de gepaarde t-toets, de onafhankelijke
+t-toets en de Welch's t-toets zijn allemaal uit te voeren met de
+volgende functie: \texttt{t.test()}.
+
+In dit hoofdstuk willen we twee groepen vergelijken. Dat kan je op twee
+manieren aangeven in \texttt{t.test()}:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{t.test(g1,\ g2)}
+\item
+  \texttt{t.test(v\textasciitilde{}g)}
+\end{itemize}
+
+De eerste optie is hetzelfde als je bij de gepaarde t-toets hebt gezien:
+g1 en g2 zijn twee vectoren. In tegenstelling tot bij de gepaarde
+t-toets, hoeft bij een onafhankelijke t-toets of Welch's t-toets beide
+vectoren niet even lang te zijn.
+
+De tweede optie heeft de voorkeur. Waarom? Omdat die aansluit bij de
+standaardmanier om je data te organiseren. Heb je bijvoorbeeld de lengte
+van planten gemeten in twee groepen (bijv, met of zonder bemesting), dan
+is dit de manier om je data in een tabel te zetten:
+
+\begin{tabular}{l|r}
+\hline
+behandeling & plantlengte\\
+\hline
+controle & 15\\
+\hline
+controle & 17\\
+\hline
+controle & 16\\
+\hline
+controle & 14\\
+\hline
+controle & 16\\
+\hline
+bemest & 15\\
+\hline
+bemest & 23\\
+\hline
+bemest & 21\\
+\hline
+bemest & 27\\
+\hline
+bemest & 18\\
+\hline
+\end{tabular}
+
+Met de tweede optie (\texttt{v\textasciitilde{}g}) geef je aan dat de
+vector verdeeld is in groepen (aangegeven met de variabele g). In het
+geval van het bemestingsexperiment voor je met de volgende code de
+Welch' t-toets uit:
+\texttt{t.test(plantdata\$plantlengte\textasciitilde{}plantdata\$behandeling)}.
+De standaardinstelling van R voor \texttt{t.test()} is dat er
+\textbf{geen} gelijke variantie wordt aangenomen, dus de Welch't-toets
+wordt uitgevoerd. Wil je wel een `gewone' onafhankelijke t-toets
+uitvoeren, moet je expliciet aangeven dat er gelijke standaarddeviatie
+wordt aangenomen voor beide groepen (`t.test(v\textasciitilde{}g,
+var.equal = TRUE)).
+
+\BeginKnitrBlock{exercise}
+\protect\hypertarget{exr:bemesting}{}{\label{exr:bemesting} }Bemesting
+
+\begin{itemize}
+\tightlist
+\item
+  Voer de data uit bovenstaande tabel in een Excel file
+\item
+  Formuleer de H\textsubscript{0} en H\textsubscript{1}
+\item
+  Maak een script die de data importeert en een t-toets uitvoert.
+\item
+  Wat is je conclusie?
+\end{itemize}
+\EndKnitrBlock{exercise}
+
+\BeginKnitrBlock{exercise}
+\protect\hypertarget{exr:muggen}{}{\label{exr:muggen} }Bier en muggen
+
+\begin{itemize}
+\tightlist
+\item
+  Voer \emph{Practise problem} 12.16 (blz. 359) uit
+\end{itemize}
+\EndKnitrBlock{exercise}
+
+\BeginKnitrBlock{exercise}
+\protect\hypertarget{exr:oef_H12}{}{(\#exr:oef\_H12) }Maak de volgende
+oefeningen uit het boek:
+
+\begin{itemize}
+\tightlist
+\item
+  12.4
+\item
+  12.5
+\item
+  12.8
+\item
+  12.11
+\end{itemize}
+\EndKnitrBlock{exercise}
+
+
+\end{document}

@@ -1,0 +1,82 @@
+#Werkcollege 1: Statistische vragen bij grafieken
+
+```{block2, type='ABD'}
+
+Lees Chapter 1 (*Statistics and samples*):
+
+Lees Chapter 2 (*Displaying data*):
+
+&nbsp;
+
+```
+
+
+Belangrijkste leerdoelen:
+
+* Verschillende figuren leren kennen
+* Weten wat voor soort data er bij welke figuren hoort
+
+
+##Soorten grafieken
+Een grafiek is dé manier om data te presenteren.
+Het laat in één oogopslag zien wat voor patronen er in de data zitten.
+Verschillende soorten data vragen om verschillende soorten grafieken.
+
+Een aantal mogelijke soorten grafieken:
+
+
+* Boxplot
+* Violin plot
+* Spreidingsdiagram (*scatter plot*)
+* Staafdiagram
+* Taartdiagram/mozaiekplot
+
+
+```{exercise, figuren}
+Soorten figuren
+
+* Zoek in de literatuur, die je verzameld hebt voor bioxperience, naar voorbeelden voor ieder van bovenstaande typen figuren, en kopieer die figuren naar je portfolio. Komt niet iedere soort grafiek voor, dan vindt je op blackboard een serie artikelen waar ze wel in voorkomen.
+```
+
+Data op de juiste manier presenteren is de eerste stap in het analyseren van je data.
+
+##Soorten data
+
+```{exercise, dataniveaus}
+Soorten data
+
+Data kan verdeeld worden in drie niveau's.
+
+* Zoek in *Analysis of Biological Data* op welke niveau's dat zijn, noteer ze in je portfolio.
+* Benoem de niveaus van de data in de figuren die je in de vorige opdracht hebt verzameld.
+```
+
+
+##Statistische vragen
+Achter ieder onderzoek, en dus ook achter iedere dataset, zitten een of meerdere **onderzoeksvragen**.
+De kunst is om een figuur zo op te zetten dat de vraag daarmee beantwoord kan worden.
+Een onderzoeksvraag wordt daarmee automatisch ook een **statistische vraag** omdat je met data uit een **steekproef** werkt. Omdat je met een steekproef werkt, heb je te maken met **onzekerheid**.
+
+Om met die onzekerheid om te gaan zijn **statistische toetsen** ontwikkeld.
+Uit een statistische toets komt een **waarschijnlijkheid** dat er géén effect is van een bepaalde factor of dat er géén verschil is tussen de groepen.
+Volgende week gaan jullie daar meer over leren
+
+```{exercise, onderzoeksvragen}
+Onderzoeksvragen
+
+* Zoek uit welke onderzoeksvragen horen bij de figuren die je hebt uitgezocht in de vorige opdrachten.
+* Zoek uit (tip: check materiaal en methode) welke statistische toets gebruikt is om de onderzoeksvraag te beantwoorden.
+* Wat is de conclusie van de statistische toets?
+* Noteer alle antwoorden in je portfolio.
+```
+
+```{exercise, opgavenw1}
+Maak de volgende opgaven uit het boek:
+
+* 1.2
+* 2.6
+* 2.8
+* 2.11
+* 2.15
+```
+

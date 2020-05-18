@@ -1,0 +1,37 @@
+--- 
+title: "Stat1: statistische modellen"
+author: "Team TV"
+date: '`r Sys.Date()`'
+bibliography: book.bib
+documentclass: book
+link-citations: yes
+url: "https://has.nl"
+
+site: bookdown::bookdown_site
+biblio-style: apalike
+---
+
+# Voorwoord {-}
+Afgelopen jaar hebben jullie al aardig wat data verzameld met practica, en de meeste ook al met hun bioxperience-project.
+In dit blok leren jullie om op basis van data betrouwbare uitspraken te doen.
+Zoals je gemerkt zult hebben in de practica, krijgt iedere groep een iets andere uitkomst uit precies hetzelfde experiment.
+Wat is nu de waarheid?
+Statistiek is ervoor om de betrouwbaarheid van de uitkomsten te berekenen.
+Op die manier weet je wat je wel en niet kan beweren op basis van je onderzoek.
+
+## Opzet {-}
+We gaan dit blok het boek *The Analysis of Biological Data* gebruiken.
+Het is een Engelstalig boek, maar vlot geschreven.
+Mocht je echt vastlopen in het Engels, geef dat dan aan, zodat we je kunnen helpen.
+
+Blok 4 is opgebouwd uit zes hoorcolleges en zes werkcolleges van ieder anderhalf uur.
+
+Tijdens de hoorcolleges krijg je een overzicht van de nieuwe stof.
+Lees vooraf de aangegeven paragrafen uit het boek, zodat je vragen kan stellen als je iets niet begrijpt!
+
+Tijdens de werkcolleges werk je aan de opdrachten.
+De antwoorden verzamel je in een Onedrive-folder die je met ons (Erno en Mark) deelt.
+De handleiding hiervoor vind je op Blackboard.
+Waarom doen we dat?
+Zodat we op een efficiënte manier jullie kunnen helpen met R-codes.
+Want ja, we gaan ook weer met R aan de slag!

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Z-toets | Stat1: statistische modellen</title>
+  <meta name="description" content="Z-toets | Stat1: statistische modellen">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Z-toets | Stat1: statistische modellen" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Z-toets | Stat1: statistische modellen" />
+  
+  
+  
+
+<meta name="author" content="Mark Smits">
+
+
+<meta name="date" content="2019-07-10">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="geschatte-standaarddeviatie.html">
+<link rel="next" href="t-verdeling.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Voorwoord</a><ul>
+<li class="chapter" data-level="" data-path="opzet.html"><a href="opzet.html"><i class="fa fa-check"></i>Opzet</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="werkcollege-1-statistische-vragen-bij-grafieken.html"><a href="werkcollege-1-statistische-vragen-bij-grafieken.html"><i class="fa fa-check"></i>Werkcollege 1: Statistische vragen bij grafieken</a><ul>
+<li class="chapter" data-level="" data-path="soorten-grafieken.html"><a href="soorten-grafieken.html"><i class="fa fa-check"></i>Soorten grafieken</a></li>
+<li class="chapter" data-level="" data-path="soorten-data.html"><a href="soorten-data.html"><i class="fa fa-check"></i>Soorten data</a></li>
+<li class="chapter" data-level="" data-path="statistische-vragen.html"><a href="statistische-vragen.html"><i class="fa fa-check"></i>Statistische vragen</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="werkcollege-2-statistische-toetsen.html"><a href="werkcollege-2-statistische-toetsen.html"><i class="fa fa-check"></i>Werkcollege 2: Statistische toetsen</a><ul>
+<li class="chapter" data-level="" data-path="hypotheses.html"><a href="hypotheses.html"><i class="fa fa-check"></i>Hypotheses</a></li>
+<li class="chapter" data-level="" data-path="type-i-en-type-ii-fouten.html"><a href="type-i-en-type-ii-fouten.html"><i class="fa fa-check"></i>Type I en type II fouten</a></li>
+<li class="chapter" data-level="" data-path="eenzijdig-en-tweezijdig-toetsen.html"><a href="eenzijdig-en-tweezijdig-toetsen.html"><i class="fa fa-check"></i>Eenzijdig en tweezijdig toetsen</a></li>
+<li class="chapter" data-level="" data-path="simuleren.html"><a href="simuleren.html"><i class="fa fa-check"></i>Simuleren</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="normale-verdeling.html"><a href="normale-verdeling.html"><i class="fa fa-check"></i>Normale verdeling</a><ul>
+<li class="chapter" data-level="" data-path="r-als-alternatief-voor-een-tabel.html"><a href="r-als-alternatief-voor-een-tabel.html"><i class="fa fa-check"></i>R als alternatief voor een tabel</a></li>
+<li class="chapter" data-level="" data-path="hypotheses-toetsen.html"><a href="hypotheses-toetsen.html"><i class="fa fa-check"></i>Hypotheses toetsen</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="t-toets-voor-een-steekproef.html"><a href="t-toets-voor-een-steekproef.html"><i class="fa fa-check"></i>t-toets voor één steekproef</a><ul>
+<li class="chapter" data-level="" data-path="geschatte-standaarddeviatie.html"><a href="geschatte-standaarddeviatie.html"><i class="fa fa-check"></i>Geschatte standaarddeviatie</a></li>
+<li class="chapter" data-level="" data-path="z-toets.html"><a href="z-toets.html"><i class="fa fa-check"></i>Z-toets</a></li>
+<li class="chapter" data-level="" data-path="t-verdeling.html"><a href="t-verdeling.html"><i class="fa fa-check"></i>t-verdeling</a></li>
+<li class="chapter" data-level="" data-path="one-sample-t-test-in-r.html"><a href="one-sample-t-test-in-r.html"><i class="fa fa-check"></i>one-sample t-test in R</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="gepaarde-t-toets.html"><a href="gepaarde-t-toets.html"><i class="fa fa-check"></i>Gepaarde t-toets</a><ul>
+<li class="chapter" data-level="" data-path="gepaarde-data.html"><a href="gepaarde-data.html"><i class="fa fa-check"></i>Gepaarde data</a></li>
+<li class="chapter" data-level="" data-path="gepaarde-t-toets-1.html"><a href="gepaarde-t-toets-1.html"><i class="fa fa-check"></i>Gepaarde t-toets</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="onafhankelijke-t-toets.html"><a href="onafhankelijke-t-toets.html"><i class="fa fa-check"></i>Onafhankelijke t-toets:</a><ul>
+<li class="chapter" data-level="" data-path="standaarddeviatie.html"><a href="standaarddeviatie.html"><i class="fa fa-check"></i>Standaarddeviatie</a></li>
+<li class="chapter" data-level="" data-path="t-toets-in-r.html"><a href="t-toets-in-r.html"><i class="fa fa-check"></i>T-toets in R</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Stat1: statistische modellen</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="z-toets" class="section level2">
+<h2>Z-toets</h2>
+<p>Zoals je in de vorige oefening zag, is gemiddeld je schatting van de standaarddeviatie kleiner dan de werkelijke standaarddeviatie.</p>
+<p>Als je dan, op basis van de geschatte standaarddeviatie, de kansverdeling van je nulhypothese opzet, dan is die klokvormige kansverdeling smaller dan in werkelijkheid. Dus verwerp je sneller je nulhypothese.</p>
+<p>Als voorbeeld weer de koeien.</p>
+<p>De volgende code voert 10000 keer een Z-toets uit op random steekproeven van n=3, met de juiste standaarddeviatie:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Functie om steekproef te nemen en z-toets erop uit te voeren</span>
+z_sigma &lt;-<span class="st"> </span>function(n, mean, sigma) {
+  sample &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n, mean, sigma)
+  p &lt;-<span class="st"> </span><span class="kw">pnorm</span>(<span class="kw">mean</span>(sample), mean, sigma/<span class="kw">sqrt</span>(n))
+}
+
+<span class="co">#10000 keer bovenstaande functie uitvoeren</span>
+ps &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">10000</span>, <span class="kw">z_sigma</span>(<span class="dt">n=</span><span class="dv">3</span>, <span class="dt">mean=</span><span class="dv">540</span>, <span class="dt">sigma=</span><span class="dv">5</span>))
+
+<span class="co">#welke fractie van de samples verwerpt (ten onrechte!) de H0?</span>
+alpha=<span class="fl">0.05</span>
+<span class="kw">length</span>(ps[ps&lt;alpha])/<span class="kw">length</span>(ps)</code></pre></div>
+<pre><code>## [1] 0.0501</code></pre>
+
+<div class="exercise">
+<p><span id="exr:ztoets" class="exercise"><strong>Opdracht 15  </strong></span>Z_sigma</p>
+<ul>
+<li>Neem bovenstaande code over in een script, en voer uit.</li>
+<li>Varieer met de <span class="math inline">\(\alpha\)</span> en check of de fractie significant afwijkende steekproeven de volgt.</li>
+</ul>
+</div>
+<p></p>
+<p>Stel nu dat we de standaarddeviatie van de populatie niet weten, dan moeten we die schatten vanuit de steekproef. Wat heeft dat voor consequenties voor de fout van de eerste soort (ten onrechte H0 verwerpen)?</p>
+<p>Dat kan je testen met de volgende code:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Functie om steekproef te nemen en z-toets erop uit te voeren</span>
+z_sigma &lt;-<span class="st"> </span>function(n, mean, sigma) {
+  sample &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n, mean, sigma)
+  p &lt;-<span class="st"> </span><span class="kw">pnorm</span>(<span class="kw">mean</span>(sample), mean, <span class="kw">sd</span>(sample)/<span class="kw">sqrt</span>(n))
+}
+
+<span class="co">#10000 keer bovenstaande functie uitvoeren</span>
+ps &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">10000</span>, <span class="kw">z_sigma</span>(<span class="dt">n=</span><span class="dv">3</span>, <span class="dt">mean=</span><span class="dv">540</span>, <span class="dt">sigma=</span><span class="dv">5</span>))
+
+<span class="co">#welke fractie van de samples verwerpt (ten onrechte!) de H0?</span>
+alpha=<span class="fl">0.05</span>
+<span class="kw">length</span>(ps[ps&lt;alpha])/<span class="kw">length</span>(ps)</code></pre></div>
+<pre><code>## [1] 0.1154</code></pre>
+
+<div class="exercise">
+<p><span id="exr:zstschat" class="exercise"><strong>Opdracht 16  </strong></span>Z_s</p>
+<ul>
+<li>Neem bovenstaande code over in een script, en voer uit.</li>
+<li>Varieer met de <span class="math inline">\(\alpha\)</span> en check of de fractie significant afwijkende steekproeven de <span class="math inline">\(\alpha\)</span> volgt.</li>
+<li>Herhaal met n=30 (dus een steekproefgrootte van 30)</li>
+<li>Wat is het verschil?</li>
+</ul>
+</div>
+<p></p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="geschatte-standaarddeviatie.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="t-verdeling.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"collapse": "subsection"
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
